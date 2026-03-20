@@ -1,0 +1,8 @@
+# Keep repository scoped to backend source only
+ECOMMERCE_REQUIREMENTS.*
+Global+Electronics+Retailer/
+ecom_task(timeline).csv
+ecom_task.pdf
+file1.md
+file2.md
+file3.md
