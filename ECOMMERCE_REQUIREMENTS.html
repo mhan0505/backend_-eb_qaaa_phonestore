@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ECOMMERCE_REQUIREMENTS.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h3 id="1-th%C3%B4ng-tin-chung-d%E1%BB%B1-%C3%A1n">1. Thông tin chung dự án</h3>
+<ul>
+<li><strong>Tên dự án</strong>: Website thương mại điện tử XYZ</li>
+<li><strong>Mục tiêu</strong>:
+<ul>
+<li><strong>Kinh doanh</strong>: Tăng doanh thu online, mở rộng tệp khách hàng, giảm chi phí vận hành.</li>
+<li><strong>Người dùng</strong>: Mua hàng nhanh, dễ, tiện, minh bạch thông tin.</li>
+</ul>
+</li>
+<li><strong>Phạm vi</strong>:
+<ul>
+<li>Website (Desktop + Mobile Web), có thể mở rộng Mobile App sau.</li>
+<li>Hệ thống quản trị (Admin) cho vận hành.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="2-%C4%91%E1%BB%91i-t%C6%B0%E1%BB%A3ng-s%E1%BB%AD-d%E1%BB%A5ng--vai-tr%C3%B2-h%E1%BB%87-th%E1%BB%91ng">2. Đối tượng sử dụng &amp; vai trò hệ thống</h3>
+<ul>
+<li><strong>Khách vãng lai (Guest)</strong>: Xem sản phẩm, tìm kiếm, thêm giỏ, đăng ký.</li>
+<li><strong>Khách hàng đã đăng ký (Customer)</strong>: Đặt hàng, theo dõi đơn, quản lý tài khoản.</li>
+<li><strong>Nhân viên CSKH (Support/CS)</strong>: Xử lý khiếu nại, hỗ trợ đơn hàng, chat.</li>
+<li><strong>Nhân viên vận hành (Ops)</strong>: Quản lý đơn, kho, vận chuyển.</li>
+<li><strong>Admin</strong>: Quản lý toàn bộ hệ thống, cấu hình, quyền hạn.</li>
+<li><strong>Nhà bán hàng (Seller)</strong> (nếu là marketplace): Quản lý sản phẩm, đơn hàng của riêng mình.</li>
+</ul>
+<hr>
+<h3 id="3-ph%C3%A2n-r%C3%A3-module--ch%E1%BB%A9c-n%C4%83ng-b%E1%BA%A3ng-t%E1%BB%95ng-h%E1%BB%A3p">3. Phân rã module &amp; chức năng (bảng tổng hợp)</h3>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Module</th>
+<th>Chức năng chính</th>
+<th>Vai trò liên quan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Trang chủ</td>
+<td>Banner, danh mục, sản phẩm nổi bật, flash sale</td>
+<td>Guest, Customer</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Danh mục &amp; Tìm kiếm</td>
+<td>Duyệt danh mục, bộ lọc, search gợi ý</td>
+<td>Guest, Customer</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Trang chi tiết sản phẩm</td>
+<td>Thông tin sản phẩm, giá, tồn kho, đánh giá</td>
+<td>Guest, Customer</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Giỏ hàng (Cart)</td>
+<td>Thêm/xóa/sửa sản phẩm, mã giảm giá</td>
+<td>Guest, Customer</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Thanh toán (Checkout)</td>
+<td>Nhập địa chỉ, chọn vận chuyển, chọn thanh toán</td>
+<td>Customer</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Thanh toán online</td>
+<td>Tích hợp cổng thanh toán (VNPay, MoMo,...)</td>
+<td>Customer</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Tài khoản người dùng</td>
+<td>Hồ sơ, sổ địa chỉ, đổi mật khẩu</td>
+<td>Customer</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Đơn hàng của tôi</td>
+<td>Lịch sử đơn, trạng thái, hủy đơn, trả hàng</td>
+<td>Customer</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Đánh giá &amp; phản hồi</td>
+<td>Đánh giá sản phẩm, comment, rating</td>
+<td>Customer</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Yêu thích / Wishlist</td>
+<td>Lưu sản phẩm yêu thích</td>
+<td>Customer</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Thông báo</td>
+<td>Email/SMS/push/web notification</td>
+<td>Customer</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Chat/CSKH</td>
+<td>Live chat, ticket hỗ trợ</td>
+<td>Customer, CS</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Khuyến mãi &amp; Voucher</td>
+<td>Mã giảm giá, flash sale, combo</td>
+<td>Customer, Admin</td>
+</tr>
+<tr>
+<td>14</td>
+<td>CMS nội dung</td>
+<td>Trang blog, tin tức, FAQ, chính sách</td>
+<td>Admin</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Quản lý sản phẩm</td>
+<td>CRUD sản phẩm, biến thể, tồn kho</td>
+<td>Admin, Ops</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Quản lý đơn hàng</td>
+<td>Xem/xử lý đơn, thay đổi trạng thái</td>
+<td>Admin, Ops</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Quản lý kho</td>
+<td>Tồn kho, nhập xuất, cảnh báo hết hàng</td>
+<td>Admin, Ops</td>
+</tr>
+<tr>
+<td>18</td>
+<td>Quản lý khách hàng</td>
+<td>Danh sách khách, phân nhóm, lịch sử</td>
+<td>Admin, CS</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Báo cáo &amp; Dashboard</td>
+<td>Doanh thu, đơn, top sản phẩm</td>
+<td>Admin, Management</td>
+</tr>
+<tr>
+<td>20</td>
+<td>Cấu hình hệ thống</td>
+<td>Cài đặt thanh toán, vận chuyển, cấu hình UI</td>
+<td>Admin</td>
+</tr>
+<tr>
+<td>21</td>
+<td>Phân quyền &amp; bảo mật</td>
+<td>Role, quyền, nhật ký hoạt động</td>
+<td>Admin</td>
+</tr>
+<tr>
+<td>22</td>
+<td>Tích hợp bên thứ 3</td>
+<td>Giao vận, thanh toán, CRM, marketing</td>
+<td>Admin, Tech</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="4-chi-ti%E1%BA%BFt-t%C3%ADnh-n%C4%83ng-theo-module">4. Chi tiết tính năng theo module</h3>
+<h4 id="41-trang-ch%E1%BB%A7">4.1. Trang chủ</h4>
+<ul>
+<li><strong>Thành phần</strong>:
+<ul>
+<li>Banner lớn (hero banner) + slider.</li>
+<li>Block danh mục chính.</li>
+<li>Sản phẩm nổi bật / bán chạy / mới về.</li>
+<li>Khung Flash Sale (đếm ngược thời gian).</li>
+<li>Gợi ý sản phẩm theo lịch sử duyệt/mua (nếu có).</li>
+</ul>
+</li>
+<li><strong>Yêu cầu</strong>:
+<ul>
+<li>Tốc độ tải nhanh.</li>
+<li>Tùy chỉnh block từ Admin (banner, danh mục nổi bật…).</li>
+</ul>
+</li>
+</ul>
+<h4 id="42-danh-m%E1%BB%A5c--t%C3%ACm-ki%E1%BA%BFm">4.2. Danh mục &amp; Tìm kiếm</h4>
+<ul>
+<li><strong>Danh mục</strong>:
+<ul>
+<li>Cấu trúc đa cấp: Ngành hàng → Danh mục → Nhóm sản phẩm.</li>
+<li>URL thân thiện SEO (ví dụ: <code>/dien-thoai/iphone</code>).</li>
+</ul>
+</li>
+<li><strong>Bộ lọc (Filter)</strong>:
+<ul>
+<li>Theo giá, thương hiệu, thuộc tính (size, màu, chất liệu…).</li>
+<li>Cho phép chọn nhiều giá trị (multi-select).</li>
+</ul>
+</li>
+<li><strong>Sắp xếp (Sort)</strong>:
+<ul>
+<li>Mới nhất, giá tăng/giảm, bán chạy, đánh giá cao.</li>
+</ul>
+</li>
+<li><strong>Tìm kiếm</strong>:
+<ul>
+<li>Ô search trên header, gợi ý khi gõ (autocomplete).</li>
+<li>Gợi ý từ khóa hot, lịch sử tìm kiếm.</li>
+</ul>
+</li>
+</ul>
+<h4 id="43-trang-chi-ti%E1%BA%BFt-s%E1%BA%A3n-ph%E1%BA%A9m">4.3. Trang chi tiết sản phẩm</h4>
+<ul>
+<li><strong>Thông tin chính</strong>:
+<ul>
+<li>Tên, giá gốc, giá khuyến mãi, % giảm.</li>
+<li>Tình trạng tồn kho.</li>
+<li>Ảnh sản phẩm (gallery), video (nếu có).</li>
+<li>Thuộc tính chọn lựa (size, màu, dung lượng…).</li>
+<li>Mô tả chi tiết (HTML), thông số kỹ thuật.</li>
+</ul>
+</li>
+<li><strong>Xã hội / Tin cậy</strong>:
+<ul>
+<li>Số lượt đánh giá, điểm trung bình.</li>
+<li>Đánh giá chi tiết + ảnh từ khách.</li>
+<li>Câu hỏi &amp; trả lời (Q&amp;A).</li>
+</ul>
+</li>
+<li><strong>Hành động</strong>:
+<ul>
+<li>Thêm vào giỏ.</li>
+<li>Mua ngay.</li>
+<li>Thêm vào yêu thích.</li>
+<li>Chia sẻ link (Facebook, Zalo…).</li>
+</ul>
+</li>
+</ul>
+<h4 id="44-gi%E1%BB%8F-h%C3%A0ng-cart">4.4. Giỏ hàng (Cart)</h4>
+<ul>
+<li><strong>Chức năng</strong>:
+<ul>
+<li>Xem danh sách sản phẩm đã chọn (ảnh, tên, giá, số lượng).</li>
+<li>Cập nhật số lượng, xóa sản phẩm.</li>
+<li>Áp mã khuyến mãi, voucher.</li>
+<li>Tính tiền tạm tính, phí ship (ước tính), tổng tiền.</li>
+</ul>
+</li>
+<li><strong>Yêu cầu</strong>:
+<ul>
+<li>Lưu giỏ cho cả Guest (local) và Customer (trên server).</li>
+<li>Cảnh báo nếu sản phẩm hết hàng / đổi giá.</li>
+</ul>
+</li>
+</ul>
+<h4 id="45-thanh-to%C3%A1n-checkout">4.5. Thanh toán (Checkout)</h4>
+<ul>
+<li><strong>Bước 1 – Thông tin khách hàng</strong>:
+<ul>
+<li>Họ tên, điện thoại, email.</li>
+<li>Địa chỉ nhận hàng chi tiết (Tỉnh/TP, Quận/Huyện, Phường/Xã, địa chỉ).</li>
+</ul>
+</li>
+<li><strong>Bước 2 – Phương thức vận chuyển</strong>:
+<ul>
+<li>Lựa chọn đơn vị vận chuyển (GHN, GHTK,…).</li>
+<li>Thời gian giao dự kiến, phí ship tương ứng.</li>
+</ul>
+</li>
+<li><strong>Bước 3 – Phương thức thanh toán</strong>:
+<ul>
+<li>COD (thanh toán khi nhận hàng).</li>
+<li>Thanh toán online (VNPay/MoMo/…).</li>
+</ul>
+</li>
+<li><strong>Bước 4 – Xác nhận đơn</strong>:
+<ul>
+<li>Tóm tắt đơn (sản phẩm, giá, phí, tổng).</li>
+<li>Nút “Đặt hàng”.</li>
+</ul>
+</li>
+<li><strong>Kết quả</strong>:
+<ul>
+<li>Tạo mã đơn hàng.</li>
+<li>Gửi email/SMS xác nhận.</li>
+</ul>
+</li>
+</ul>
+<h4 id="46-thanh-to%C3%A1n-online">4.6. Thanh toán online</h4>
+<ul>
+<li><strong>Tích hợp cổng thanh toán</strong>:
+<ul>
+<li>API redirect sang cổng thanh toán.</li>
+<li>Nhận callback kết quả (thành công/thất bại).</li>
+</ul>
+</li>
+<li><strong>Xử lý lỗi</strong>:
+<ul>
+<li>Nếu thanh toán thất bại: giữ đơn ở trạng thái chờ thanh toán hoặc hủy theo business rule.</li>
+<li>Ghi log giao dịch để đối soát.</li>
+</ul>
+</li>
+</ul>
+<h4 id="47-t%C3%A0i-kho%E1%BA%A3n-ng%C6%B0%E1%BB%9Di-d%C3%B9ng--%C4%91%C6%A1n-h%C3%A0ng-c%E1%BB%A7a-t%C3%B4i">4.7. Tài khoản người dùng &amp; Đơn hàng của tôi</h4>
+<ul>
+<li><strong>Đăng ký / Đăng nhập</strong>:
+<ul>
+<li>Email + mật khẩu, hoặc SSO (Google/Facebook).</li>
+<li>Quên mật khẩu, đổi mật khẩu.</li>
+</ul>
+</li>
+<li><strong>Thông tin tài khoản</strong>:
+<ul>
+<li>Hồ sơ (tên, SĐT, ngày sinh, giới tính).</li>
+<li>Sổ địa chỉ (default + nhiều địa chỉ).</li>
+</ul>
+</li>
+<li><strong>Đơn hàng của tôi</strong>:
+<ul>
+<li>Danh sách đơn (mới nhất trước).</li>
+<li>Chi tiết đơn: sản phẩm, trạng thái, lịch sử thay đổi.</li>
+<li>Hành động: hủy đơn (nếu chưa xử lý), yêu cầu trả hàng, in hóa đơn (nếu có).</li>
+</ul>
+</li>
+</ul>
+<h4 id="48-%C4%91%C3%A1nh-gi%C3%A1-ph%E1%BA%A3n-h%E1%BB%93i-chat">4.8. Đánh giá, phản hồi, chat</h4>
+<ul>
+<li><strong>Đánh giá sản phẩm</strong>:
+<ul>
+<li>Điểm sao (1–5).</li>
+<li>Nội dung text + upload ảnh/video.</li>
+<li>Filter và sort đánh giá (mới nhất, có ảnh, 5 sao…).</li>
+</ul>
+</li>
+<li><strong>Chat / Hỗ trợ</strong>:
+<ul>
+<li>Live chat với CSKH hoặc chatbot.</li>
+<li>Tạo ticket khiếu nại / yêu cầu hỗ trợ.</li>
+</ul>
+</li>
+</ul>
+<h4 id="49-khuy%E1%BA%BFn-m%C3%A3i-voucher-flash-sale">4.9. Khuyến mãi, voucher, flash sale</h4>
+<ul>
+<li><strong>Voucher</strong>:
+<ul>
+<li>Theo đơn hàng, theo sản phẩm, theo user group.</li>
+<li>Điều kiện áp dụng (min order, giới hạn số lần, thời gian).</li>
+</ul>
+</li>
+<li><strong>Flash sale</strong>:
+<ul>
+<li>Thời gian bắt đầu/kết thúc.</li>
+<li>Số lượng giới hạn, hiển thị progress còn bao nhiêu.</li>
+</ul>
+</li>
+<li><strong>Combo, mua kèm</strong>:
+<ul>
+<li>Mua combo giảm giá, gợi ý mua kèm.</li>
+</ul>
+</li>
+</ul>
+<h4 id="410-cms-n%E1%BB%99i-dung--trang-ch%C3%ADnh-s%C3%A1ch">4.10. CMS nội dung &amp; trang chính sách</h4>
+<ul>
+<li><strong>Trang nội dung tĩnh</strong>:
+<ul>
+<li>Giới thiệu, Liên hệ, Tuyển dụng.</li>
+<li>Chính sách bảo mật, đổi trả, giao hàng, thanh toán.</li>
+</ul>
+</li>
+<li><strong>Blog / Tin tức</strong>:
+<ul>
+<li>Bài viết, chuyên mục, tag.</li>
+<li>Hiển thị trên trang chủ/landing.</li>
+</ul>
+</li>
+</ul>
+<h4 id="411-admin-%E2%80%93-qu%E1%BA%A3n-l%C3%BD-s%E1%BA%A3n-ph%E1%BA%A9m-%C4%91%C6%A1n-h%C3%A0ng-kho">4.11. Admin – Quản lý sản phẩm, đơn hàng, kho</h4>
+<ul>
+<li><strong>Quản lý sản phẩm</strong>:
+<ul>
+<li>Tạo/sửa/xóa sản phẩm.</li>
+<li>Thiết lập danh mục, thương hiệu, thuộc tính, biến thể.</li>
+<li>Quản lý giá, tồn kho, ảnh, SEO (title, meta, slug).</li>
+</ul>
+</li>
+<li><strong>Quản lý đơn hàng</strong>:
+<ul>
+<li>Xem danh sách đơn, filter theo trạng thái/thời gian/khách.</li>
+<li>Cập nhật trạng thái: Mới → Đang xử lý → Đang giao → Hoàn tất → Hủy.</li>
+<li>Ghi chú nội bộ, lịch sử trạng thái.</li>
+</ul>
+</li>
+<li><strong>Quản lý kho</strong>:
+<ul>
+<li>Tồn kho theo sản phẩm/biến thể.</li>
+<li>Nhập hàng, xuất hàng (nếu cần).</li>
+<li>Cảnh báo tồn kho thấp.</li>
+</ul>
+</li>
+</ul>
+<h4 id="412-admin-%E2%80%93-kh%C3%A1ch-h%C3%A0ng-b%C3%A1o-c%C3%A1o-c%E1%BA%A5u-h%C3%ACnh">4.12. Admin – Khách hàng, báo cáo, cấu hình</h4>
+<ul>
+<li><strong>Quản lý khách hàng</strong>:
+<ul>
+<li>Danh sách user, lịch sử mua hàng.</li>
+<li>Phân nhóm (VIP, mới, tiềm năng…).</li>
+</ul>
+</li>
+<li><strong>Báo cáo</strong>:
+<ul>
+<li>Doanh thu theo ngày/tháng/kênh.</li>
+<li>Top sản phẩm bán chạy.</li>
+<li>Tỷ lệ hủy đơn, tỷ lệ thanh toán online thành công.</li>
+</ul>
+</li>
+<li><strong>Cấu hình hệ thống</strong>:
+<ul>
+<li>Cấu hình phí ship, mức miễn phí ship.</li>
+<li>Cài đặt cổng thanh toán, API đối tác.</li>
+<li>Cài đặt banner, màu sắc chủ đề (nếu cho phép tùy chỉnh).</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="5-y%C3%AAu-c%E1%BA%A7u-phi-ch%E1%BB%A9c-n%C4%83ng-non-functional">5. Yêu cầu phi chức năng (Non-functional)</h3>
+<ul>
+<li><strong>Hiệu năng</strong>:
+<ul>
+<li>Thời gian tải trang chủ &lt; 3s với đường truyền bình thường.</li>
+</ul>
+</li>
+<li><strong>Bảo mật</strong>:
+<ul>
+<li>HTTPS toàn site.</li>
+<li>Mã hóa mật khẩu, bảo vệ dữ liệu cá nhân (theo quy định địa phương).</li>
+</ul>
+</li>
+<li><strong>Khả dụng &amp; ổn định</strong>:
+<ul>
+<li>Thời gian uptime ≥ 99%.</li>
+</ul>
+</li>
+<li><strong>Khả năng mở rộng</strong>:
+<ul>
+<li>Thiết kế để có thể thêm app mobile, tích hợp thêm đối tác trong tương lai.</li>
+</ul>
+</li>
+<li><strong>Khả năng SEO</strong>:
+<ul>
+<li>URL thân thiện, meta tag, sitemap, robots.txt.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="6-t%C3%ADch-h%E1%BB%A3p-b%C3%AAn-th%E1%BB%A9-ba">6. Tích hợp bên thứ ba</h3>
+<ul>
+<li><strong>Thanh toán</strong>: VNPay, MoMo, ZaloPay, v.v.</li>
+<li><strong>Vận chuyển</strong>: GHN, GHTK, VNPost… (tính phí tự động, cập nhật trạng thái).</li>
+<li><strong>Marketing/CRM</strong>: Email marketing (Mailchimp/SendGrid), Facebook Pixel, Google Analytics.</li>
+</ul>
+<hr>
+<h3 id="7-g%E1%BB%A3i-%C3%BD-c%E1%BA%A5u-tr%C3%BAc-b%E1%BA%A3ng-t%C3%A0i-li%E1%BB%87u-chi-ti%E1%BA%BFt-d%C3%B9ng-cho-excelsheets">7. Gợi ý cấu trúc bảng tài liệu chi tiết (dùng cho Excel/Sheets)</h3>
+<ol>
+<li><strong>Overview</strong>: Mục tiêu, phạm vi, timeline.</li>
+<li><strong>User Roles</strong>: Bảng mô tả vai trò &amp; quyền hạn.</li>
+<li><strong>Feature List</strong>:
+<ul>
+<li>Cột gợi ý: <code>Module</code> / <code>Mã chức năng</code> / <code>Tên chức năng</code> / <code>Mô tả chi tiết</code> / <code>Vai trò</code> / <code>Độ ưu tiên</code> / <code>Ghi chú</code>.</li>
+</ul>
+</li>
+<li><strong>Business Rules</strong>:
+<ul>
+<li>Quy định về phí ship, voucher, chính sách hủy, đổi trả…</li>
+</ul>
+</li>
+<li><strong>Non-functional</strong>:
+<ul>
+<li>Hiệu năng, bảo mật, logging, backup.</li>
+</ul>
+</li>
+<li><strong>Integration</strong>:
+<ul>
+<li>Danh sách hệ thống tích hợp, thông tin API chính.</li>
+</ul>
+</li>
+</ol>
+
+</body>
+</html>
